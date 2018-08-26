@@ -14,6 +14,7 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
             
 spring:
+#  banner.image.location: classpath:tumblr-art-gifs-circle-wave.gif
   cloud:
     gateway:
       discovery:
