@@ -1,0 +1,11 @@
+version: "2"
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: camthanh-discovery
+    ports:
+     - "8761:8761"
+    volumes:
+- "./:/app"
