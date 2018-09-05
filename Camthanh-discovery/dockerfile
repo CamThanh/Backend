@@ -1,3 +1,3 @@
 FROM openjdk:8-jdk-alpine
 COPY ./target/Camthanh-discovery-1.0.0.jar /app
-ENTRYPOINT [ "java","-jar","/app/target/c" ]
+ENTRYPOINT [ "java","-jar","/app/target/Camthanh-discovery-1.0.0.jar" ]
