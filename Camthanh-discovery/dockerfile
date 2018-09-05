@@ -1,3 +1,4 @@
 FROM openjdk:8-jdk-alpine
+VOLUME /tmp
 COPY /root/camthanh-backend/Backend/Camthanh-discovery/target/Camthanh-discovery-1.0.0.jar /root/tmp/
 ENTRYPOINT [ "java","-jar","/root/tmp/Camthanh-discovery-1.0.0.jar" ]
