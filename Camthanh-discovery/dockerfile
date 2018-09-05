@@ -1,4 +1,4 @@
-FROM Camthanh-discovery-1.0.0
+FROM camthanh-discovery
 MAINTAINER phamanh1811
 RUN apk add --no-cache openjdk8
 COPY files/UnlimitedJCEPolicyJDK8/* \
