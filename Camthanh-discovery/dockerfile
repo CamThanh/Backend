@@ -1,5 +1,4 @@
 FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} Camthanh-discovery-1.0.0.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/root/camthanh-backend/Backend/Camthanh-discovery/target/Camthanh-discovery-1.0.0.jar"]
+RUN apt-get update && apt-get install librrds-perl rrdtool -y
+COPY . /app
+ENTRYPOINT [ "java","-jar","/app/target/Camthanh-discovery-1.0.0.jar" ]
