@@ -1,5 +1,6 @@
 package com.vn.camthanh.CamthanhAccount;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
@@ -22,9 +23,11 @@ import lombok.Setter;
 public class Authority implements GrantedAuthority {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", columnDefinition = "BINARY(16)")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private String id;
 
     @Column(name = "NAME")
     private String name;
@@ -32,5 +35,12 @@ public class Authority implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return getName();
+    }
+    
+    public Authority(String name) {
+    	this.name = name;
+    }
+    
+    public Authority() {
     }
 }

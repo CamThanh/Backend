@@ -6,19 +6,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -31,12 +30,6 @@ import lombok.Data;
 //@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
-    /**
-	 * 
-	 */
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@Transient
-	private static final long serialVersionUID = 1L;
 //
 //	@Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +38,14 @@ public class User implements UserDetails {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
 	@Id
-    private Long id;
+    private String id;
 
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinTable(name = "USER_DETAIL", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_DETAIL_ID", referencedColumnName = "ID"))
+    //@OrderBy
+    @JsonIgnore
+	private UserDetail userDetail;
+	
     @Column(name = "USER_NAME")
     private String username;
 
@@ -65,7 +64,7 @@ public class User implements UserDetails {
     @Column(name = "ENABLED")
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
     //@OrderBy
     @JsonIgnore
