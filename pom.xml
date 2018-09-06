@@ -9,13 +9,6 @@
 	<name>Camthanh-BackEnd</name>
 	<packaging>pom</packaging>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.3.RELEASE</version>
-		<relativePath></relativePath>
-	</parent>
-
 	<build>
 		<finalName>Camthanh-BackEnd</finalName>
 		<pluginManagement>
@@ -79,9 +72,9 @@
 
 
 	<modules>
-		<module>Camthanh-oauth2</module>
-		<module>Camthanh-discovery</module>
-		<module>Camthanh-gateway</module>
+		<module>Camthanh-Infra-Oauth2</module>
+		<module>Camthanh-Infra-Discovery</module>
+		<module>Camthanh-Infra-Gateway</module>
 
 		<!-- commented out because these don't build on Jenkins -->
 		<!-- <module>clients-angular4/oauth-ui-implicit-angular4</module> <module>clients-angular4/oauth-ui-password-angular4</module> -->
