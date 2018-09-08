@@ -13,17 +13,28 @@ logging:
   pattern: 
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
 
-zuul:  
-  routes:    
+zuul:
+  routes:  
+#    uaa:
+#      path: /user/**
+#      sensitiveHeaders:
+#      serviceId: Camthanh-oauth2-service
     account:
       path: /account/**
-      url: http://${eureka.instance.hostname}:8081/camthanh-account/account
-    resource:      
-      path: /resource/**
-      url: http://${eureka.instance.hostname}:9001/resource
-    user:
-      path: /user/**
-      url: http://${eureka.instance.hostname}:9999/camthanh-oauth2/user
+      sensitiveHeaders: 
+      serviceId: Camthanh-account-service
+      
+#zuul:  
+#  routes:    
+#    account:
+#      path: /account/**
+#      url: http://${eureka.instance.hostname}:8081/camthanh-account/account
+#    resource:      
+#      path: /resource/**
+#      url: http://${eureka.instance.hostname}:9001/resource
+#    user:
+#      path: /user/**
+#      url: http://${eureka.instance.hostname}:9999/camthanh-oauth2/user
 
 spring:
 #  banner.image.location: classpath:tumblr-art-gifs-circle-wave.gif

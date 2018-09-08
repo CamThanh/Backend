@@ -41,23 +41,23 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//    	User user1 = new User();
-//    	user1.setAccountExpired(false);
-//    	user1.setAccountLocked(false);
-//    	user1.setCredentialsExpired(false);
-//    	user1.setEnabled(true);
-//    	user1.setPassword("$2a$08$qvrzQZ7jJ7oy2p/msL4M0.l83Cd0jNsX6AJUitbgRXGzge4j035ha"); // admin1234
-//    	user1.setUsername("admin");
-//    	
-//    	List<Authority> auths = new ArrayList<>();
-//    	auths.add(new Authority("COMPANY_CREATE"));
-//    	auths.add(new Authority("COMPANY_READ"));
-//    	auths.add(new Authority("COMPANY_UPDATE"));
-//    	auths.add(new Authority("COMPANY_DELETE"));
-//    	
-//    	user1.setAuthorities(auths);
-//  	
-//    	((UserDetailsServiceImpl)userDetailsService).getUserRepository().save(user1);
+    	User user1 = new User();
+    	user1.setAccountExpired(false);
+    	user1.setAccountLocked(false);
+    	user1.setCredentialsExpired(false);
+    	user1.setEnabled(true);
+    	user1.setPassword("$2a$08$qvrzQZ7jJ7oy2p/msL4M0.l83Cd0jNsX6AJUitbgRXGzge4j035ha"); // admin1234
+    	user1.setUsername("admin");
+    	
+    	List<Authority> auths = new ArrayList<>();
+    	auths.add(new Authority("COMPANY_CREATE"));
+    	auths.add(new Authority("COMPANY_READ"));
+    	auths.add(new Authority("COMPANY_UPDATE"));
+    	auths.add(new Authority("COMPANY_DELETE"));
+    	
+    	user1.setAuthorities(auths);
+  	
+    	((UserDetailsServiceImpl)userDetailsService).getUserRepository().save(user1);
         auth.userDetailsService(userDetailsService).passwordEncoder(userPasswordEncoder);
     }
 }
