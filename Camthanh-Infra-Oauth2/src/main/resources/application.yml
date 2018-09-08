@@ -1,8 +1,8 @@
 server:
   servlet:
     application-display-name: Camthanh-oauth2-service
-  http2:
-    enabled: true
+#  http2:
+#    enabled: true
   servlet.context-path: /camthanh-oauth2
   port: 9999
 

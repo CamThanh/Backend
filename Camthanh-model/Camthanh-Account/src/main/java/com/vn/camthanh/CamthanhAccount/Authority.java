@@ -3,6 +3,8 @@ package com.vn.camthanh.CamthanhAccount;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,12 +24,12 @@ import lombok.Setter;
 //@EqualsAndHashCode(of = "id")
 public class Authority implements GrantedAuthority {
 
-    @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", columnDefinition = "BINARY(16)")
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private String id;
+    @Column(name = "ID", columnDefinition = "BINARY(16)")
+    @Id
+    private UUID uuid;
 
     @Column(name = "NAME")
     private String name;

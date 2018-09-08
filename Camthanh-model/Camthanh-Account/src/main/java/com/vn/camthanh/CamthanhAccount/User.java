@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,10 +36,10 @@ public class User implements UserDetails {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "ID")
 	@GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@Column(name = "ID", columnDefinition = "BINARY(16)")
 	@Id
-    private String id;
+	private UUID uuid;
 
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinTable(name = "USER_DETAIL", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_DETAIL_ID", referencedColumnName = "ID"))

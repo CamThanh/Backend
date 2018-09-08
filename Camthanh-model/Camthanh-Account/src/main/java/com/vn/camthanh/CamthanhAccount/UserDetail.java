@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,19 +36,19 @@ public class UserDetail {
 
     /**
 	 * 
-	 */
+	 *//*
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@Transient
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;*/
 //
 //	@Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "ID")
 	@GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@Column(name = "ID", columnDefinition = "BINARY(16)")
 	@Id
-    private String id;
+	private UUID uuid;
 
     @Column
     private String firstname;

@@ -1,16 +1,17 @@
-package com.vn.camthanh.spring.gateway;
+package com.vn.camthanh;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableZuulProxy
 public class CamthanhGatewayApplication {
 
-	
 	public static void main(String[] args) {
 		SpringApplication.run(CamthanhGatewayApplication.class, args);
 	}
-	
+
 }
