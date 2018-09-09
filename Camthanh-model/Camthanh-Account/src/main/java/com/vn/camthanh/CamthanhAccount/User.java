@@ -44,7 +44,7 @@ public class User implements UserDetails {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinTable(name = "USER_DETAIL", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_DETAIL_ID", referencedColumnName = "ID"))
     //@OrderBy
-    @JsonIgnore
+    //@JsonIgnore
 	private UserDetail userDetail;
 	
     @Column(name = "USER_NAME")
@@ -68,7 +68,7 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
     //@OrderBy
-    @JsonIgnore
+    //@JsonIgnore
     private Collection<Authority> authorities;
 
     @Override

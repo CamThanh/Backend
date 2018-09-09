@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vn.camthanh.CamthanhAccount.Authority;
 import com.vn.camthanh.CamthanhAccount.User;
 import com.vn.camthanh.account.repository.AccountRepository;
 
@@ -33,6 +34,12 @@ public class AccountController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public User add(@RequestBody User account) {
 		LOGGER.info("User add: {}", account);
+		if(account.getAuthorities() == null) {
+			List<Authority> auths = new ArrayList<>();
+			auths.add(new Authority());
+			account.setAuthorities(auths);
+		}
+		
 		return repository.save(account);
 	}
 	

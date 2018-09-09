@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-	@GetMapping("/userInfo")
+	/*@GetMapping("/userInfo")
 	public Principal userInfo(Principal principal) {
 		return principal;
 	}
-	
+	*/
 }

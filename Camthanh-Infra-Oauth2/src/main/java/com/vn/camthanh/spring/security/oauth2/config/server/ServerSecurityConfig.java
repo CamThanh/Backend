@@ -25,13 +25,13 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 import com.vn.camthanh.CamthanhAccount.Authority;
 import com.vn.camthanh.CamthanhAccount.User;
 import com.vn.camthanh.spring.security.oauth2.config.encryption.Encoders;
-import com.vn.camthanh.spring.security.oauth2.model.CustomOAuth2Authentication;
+//import com.vn.camthanh.spring.security.oauth2.model.CustomOAuth2Authentication;
 import com.vn.camthanh.spring.security.oauth2.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-@Import({Encoders.class, ResourceServerConfiguration.class})
+@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
+@Import(Encoders.class)
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

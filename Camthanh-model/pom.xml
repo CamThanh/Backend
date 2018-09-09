@@ -79,6 +79,7 @@
 
 
 	<modules>
+		<module>Camthanh-Commons</module>
 		<module>Camthanh-Account</module>
 		<module>Camthanh-Book</module>
 		<module>Camthanh-Payment</module>
