@@ -29,7 +29,8 @@ public class AccountController {
 	@Autowired
 	private AccountRepository repository;
 	
-	@PostMapping("/")
+	//@PostMapping("/")
+	@RequestMapping(value="/", method=RequestMethod.POST)
 	public User add(@RequestBody User account) {
 		LOGGER.info("User add: {}", account);
 		return repository.save(account);

@@ -40,20 +40,21 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder userPasswordEncoder;
     
-    @Autowired
-    private ResourceServerTokenServices tokenServices;
+//    @Autowired
+//    private ResourceServerTokenServices tokenServices;
 
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
-    	OAuth2AuthenticationManager authenticationManager = new OAuth2AuthenticationManager() {
+    	/*OAuth2AuthenticationManager authenticationManager = new OAuth2AuthenticationManager() {
     	    @Override
     	    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     	        return new CustomOAuth2Authentication( (OAuth2Authentication) super.authenticate(authentication));
     	    }
     	};
     	authenticationManager.setTokenServices(tokenServices);
-        return authenticationManager;
+        return authenticationManager;*/
+    	return super.authenticationManagerBean();
     }
 
     @Override

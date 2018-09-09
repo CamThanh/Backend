@@ -42,18 +42,18 @@ spring:
       hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
       format_sql: true
   jdbc.template.fetch-size: -1
-
-  security:
-    oauth2:    
-      client:
-        accessTokenUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/token
-        userAuthorizationUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/authorize
-        clientId: spring-security-oauth2-read-write-client
-        clientSecret: $2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W
-        scope: read,write
-        auto-approve-scopes: '.*'
-      resource:
-        userInfoUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/user/userInfo
-        preferTokenInfo: false  
-    sessions: ALWAYS
-    
+#
+#  security:
+#    oauth2:    
+#      client:
+#        accessTokenUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/token
+#        userAuthorizationUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/authorize
+#        clientId: spring-security-oauth2-read-write-client
+#        clientSecret: $2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W
+#        scope: read,write
+#        auto-approve-scopes: '.*'
+#      resource:
+#        userInfoUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/user/userInfo
+#        preferTokenInfo: false  
+#    sessions: ALWAYS
+#    

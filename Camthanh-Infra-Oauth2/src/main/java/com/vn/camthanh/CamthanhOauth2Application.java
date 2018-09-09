@@ -16,9 +16,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 @EnableJpaRepositories(basePackages="com.vn")
 @ComponentScan("com.vn")
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class})
+@EnableAutoConfiguration//(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class})
 @EnableDiscoveryClient
-@EnableResourceServer
+//@EnableResourceServer
 public class CamthanhOauth2Application {
 
     public static void main(String[] args) {
