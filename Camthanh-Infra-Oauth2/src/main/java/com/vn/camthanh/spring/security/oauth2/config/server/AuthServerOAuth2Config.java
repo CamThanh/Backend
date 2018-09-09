@@ -31,7 +31,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
     private DataSource dataSource;
 
     @Autowired
-    //@Qualifier("authenticationManagerBean")
+    @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
     @Autowired

@@ -1,15 +1,17 @@
 server:
   servlet:
-    application-display-name: Camthanh-oauth2-service
+    application-display-name: camthanh-oauth2
   http2:
     enabled: true
   servlet.context-path: /camthanh-oauth2
   port: 9999
 
+security.oauth2.resource.filter-order: 3
+
 logging:
   level:
     org.springframework:
-      security:
+      security: TRACE
       oauth2: debug
       jdbc:
         core:

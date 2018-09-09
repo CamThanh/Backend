@@ -30,7 +30,7 @@ import com.vn.camthanh.spring.security.oauth2.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
+//@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
 @Import(Encoders.class)
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
