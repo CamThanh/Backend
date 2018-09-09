@@ -10,20 +10,49 @@ eureka:
     eureka-server-port: 8761
 
 logging:
+  level:
+    org.springframework.security: TRACE
+    org.springframework.cloud.netflix.zuul: TRACE
   pattern: 
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
 
+#security:
+#  oauth2:
+#    client:
+#      client-id: spring-security-oauth2-read-write-client
+#      client-secret: $2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W
+#      authentication-scheme: header
+#      access-token-uri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/token
+##      user-authorization-uri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/authorize
+##      token-name: access_token
+##      scope: read, write
+##      auto-approve-scopes: '.*'
+#    authorization:
+#      check-token-access: isAuthenticated()
+#    resource:
+#      token-info-uri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/check_token
+#      userInfoUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/user/userInfo
+#      preferTokenInfo: false
+        
 zuul:
+  ignore-security-headers: true
+  ignoredHeaders:
+    - authorization
   routes:  
 #    uaa:
 #      path: /user/**
-#      sensitiveHeaders:
 #      serviceId: Camthanh-oauth2-service
     account:
-      path: /account/**
-      sensitiveHeaders: 
-      serviceId: Camthanh-account-service
-      
+      path: /camthanh-account/** 
+      serviceId: camthanh-account
+      stripPrefix: false
+    
+ribbon: 
+  ConnectTimeout: 3000
+  ReadTimeout: 5000
+  eager-load:
+    enabled: false
+  
 #zuul:  
 #  routes:    
 #    account:
@@ -38,13 +67,13 @@ zuul:
 
 spring:
 #  banner.image.location: classpath:tumblr-art-gifs-circle-wave.gif
-  aop:
-    proxy-target-class: true
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
+#  aop:
+#    proxy-target-class: true
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
 #      routes:
 #      - id: Camthanh-account-service
 #        uri: lb://camthanh-account
@@ -66,18 +95,18 @@ spring:
       hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
       format_sql: true
   jdbc.template.fetch-size: -1
-
-  security:
-    oauth2:    
-      client:
-        accessTokenUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/token
-        userAuthorizationUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/authorize
-        clientId: spring-security-oauth2-read-write-client
-        clientSecret: $2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W
-        scope: read,write
-        auto-approve-scopes: '.*'
-      resource:
-        userInfoUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/user/userInfo
-        preferTokenInfo: false  
-    sessions: ALWAYS
+#
+#  security:
+#    oauth2:    
+#      client:
+#        accessTokenUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/token
+#        userAuthorizationUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/oauth/authorize
+#        clientId: spring-security-oauth2-read-write-client
+#        clientSecret: $2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W
+#        scope: read,write
+#        auto-approve-scopes: '.*'
+#      resource:
+#        userInfoUri: http://${eureka.instance.hostname}:9999/camthanh-oauth2/user/userInfo
+#        preferTokenInfo: false  
+#    sessions: ALWAYS
   

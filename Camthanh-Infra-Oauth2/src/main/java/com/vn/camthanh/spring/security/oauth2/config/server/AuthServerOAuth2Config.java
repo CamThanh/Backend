@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 @Import(ServerSecurityConfig.class)
 public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
 
@@ -31,6 +31,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
     private DataSource dataSource;
 
     @Autowired
+    //@Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
     @Autowired

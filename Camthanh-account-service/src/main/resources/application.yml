@@ -1,6 +1,4 @@
 server:
-  servlet:
-    application-display-name: Camthanh-account-service
 #  http2:
 #    enabled: true
   servlet.context-path: /camthanh-account
@@ -8,6 +6,7 @@ server:
 
 logging:
   level:
+    org.springframework.security: TRACE
     org.springframework:
       security:
       oauth2: debug
