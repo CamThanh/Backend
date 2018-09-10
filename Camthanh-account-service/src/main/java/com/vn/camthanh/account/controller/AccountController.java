@@ -2,6 +2,7 @@ package com.vn.camthanh.account.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -55,6 +56,15 @@ public class AccountController {
 	public User findById(@PathVariable("id") UUID id) {
 		LOGGER.info("User find: id={}", id);
 		return repository.findById(id).get();
+	}
+	
+	@PostMapping("/{id}")
+	public ResponseEntity<User> updateById(@PathVariable("id") UUID id, @RequestBody User account) {
+		LOGGER.info("User find: id={}", id);
+		User user = repository.findById(id).get();
+		user = service.setupUser(account);
+		ResponseEntity<User> responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
+		return responseEntity;
 	}
 	
 	@GetMapping("/model")

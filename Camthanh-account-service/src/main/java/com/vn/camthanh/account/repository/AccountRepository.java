@@ -14,6 +14,7 @@ public interface AccountRepository extends CrudRepository<User, UUID> {
 
 	@Query("SELECT user FROM User user " +
             "LEFT OUTER JOIN FETCH user.authorities AS authorities " +
+            "LEFT OUTER JOIN FETCH user.userDetail AS userDetail " +
 			"WHERE user.username = :username")
     User findByUsername(@Param("username") String username);
 }

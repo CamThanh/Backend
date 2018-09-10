@@ -31,18 +31,14 @@ import lombok.Data;
 //@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
-//
-//	@Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "ID")
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "ID", columnDefinition = "BINARY(16)")
 	@Id
 	private UUID uuid;
 
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinTable(name = "USER_DETAIL", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_DETAIL_ID", referencedColumnName = "ID"))
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	//@JoinTable(name = "USER_DETAIL", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_DETAIL_ID", referencedColumnName = "ID"))
     //@OrderBy
     //@JsonIgnore
 	private UserDetail userDetail;
@@ -65,8 +61,8 @@ public class User implements UserDetails {
     @Column(name = "ENABLED")
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
     //@OrderBy
     //@JsonIgnore
     private Collection<Authority> authorities;

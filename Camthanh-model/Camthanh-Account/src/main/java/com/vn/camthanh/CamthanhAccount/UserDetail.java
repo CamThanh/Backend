@@ -1,16 +1,21 @@
 package com.vn.camthanh.CamthanhAccount;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.sun.istack.internal.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,31 +29,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
 
 import lombok.Data;
-import lombok.Getter;
-
 @Entity
 @Table(name = "USER_DETAIL")
 @Data
-//@EqualsAndHashCode(of = "id")
-public class UserDetail {
+@Embeddable
+public class UserDetail implements Serializable {
 
-    /**
-	 * 
-	 *//*
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@Transient
-	private static final long serialVersionUID = 1L;*/
-//
-//	@Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "ID")
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "ID", columnDefinition = "BINARY(16)")
 	@Id
 	private UUID uuid;
+	
+	@NotNull
+    @Email
+    @Column(unique = true)
+    private String email;
 
     @Column
     private String firstname;
@@ -56,7 +55,7 @@ public class UserDetail {
     @Column
     private String lastname;
 
-    @Column(length=1)
+    @Column
     @Enumerated(EnumType.STRING)
     private GENTLE_ENUM gentle;
 
@@ -102,7 +101,7 @@ public class UserDetail {
 //    @JsonIgnore
 //    private Collection<Authority> authorities;
 
-    @Getter
+    //@JsonFormat(shape = JsonFormat.Shape.OBJECT)
     enum GENTLE_ENUM {
     	MALE("M"),
     	FEMALE("F"),
@@ -112,6 +111,11 @@ public class UserDetail {
     	
     	GENTLE_ENUM(String gentle) {
     		this.gentle = gentle;
+    	}
+    	
+    	@JsonValue
+    	public String getGentle( ) {
+    		return gentle;
     	}
     }
 }
