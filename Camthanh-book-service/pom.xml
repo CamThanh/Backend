@@ -6,13 +6,13 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.4.RELEASE</version>
 	</parent>
-	<artifactId>Camthanh-account-service</artifactId>
+	<artifactId>Camthanh-book-service</artifactId>
 	<groupId>com.vn.camthanh</groupId>
 	<version>1.0.0</version>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<camthanh.account.version>1.0.0</camthanh.account.version>
+		<camthanh.book.version>1.0.0</camthanh.book.version>
 		<camthanh.commons.version>1.0.0</camthanh.commons.version>
 		<oauth2.version>2.2.1.RELEASE</oauth2.version>
 		<spring.cloud.eureka>1.4.5.RELEASE</spring.cloud.eureka>
@@ -104,8 +104,8 @@
         </dependency>
 		<dependency>
             <groupId>com.vn.camthanh</groupId>
-			<artifactId>Camthanh-Account</artifactId>
-			<version>${camthanh.account.version}</version>
+			<artifactId>Camthanh-Book</artifactId>
+			<version>${camthanh.book.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vn.camthanh</groupId>

@@ -1,5 +1,8 @@
 package com.vn.camthanh.account.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,19 +34,33 @@ import com.vn.camthanh.CamthanhAccount.Authority;
 import com.vn.camthanh.CamthanhAccount.User;
 import com.vn.camthanh.account.repository.AccountRepository;
 import com.vn.camthanh.account.services.AccountServiceImpl;
+import com.vn.camthanh.controller.BaseController;
+import com.vn.camthanh.services.BaseService;
 
 @RestController
 @RequestMapping("/account")
-public class AccountController {
+public class AccountController extends BaseController<User> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AccountController.class);
 
-	@Autowired
-	private AccountServiceImpl service;
+//	@Autowired
+//	private AccountRepository repository;
 	
-	@Autowired
-	private AccountRepository repository;
-
+	public AccountController(AccountServiceImpl service) {
+		super(service);
+		this.service = service;
+	}
+	
+	@GetMapping("/model")
+	public ResponseEntity<User> getModel() {
+		User user = ((AccountServiceImpl)service).getModel();
+		LOGGER.info("Generated User Model");
+		ResponseEntity<User> responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	
+	/*
 	@PostMapping
 	public ResponseEntity<User> add(@RequestBody User account) throws Exception {
 		LOGGER.info("User add: {}", account);
@@ -67,13 +85,7 @@ public class AccountController {
 		return responseEntity;
 	}
 	
-	@GetMapping("/model")
-	public ResponseEntity<User> getModel() {
-		User user = service.getModel();
-		LOGGER.info("Generated User Model");
-		ResponseEntity<User> responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
-		return responseEntity;
-	}
+	
 
 	@GetMapping
 	public ResponseEntity<List<User>> findAll() {
@@ -85,4 +97,5 @@ public class AccountController {
 		return responseEntity;
 	}
 
+*/
 }

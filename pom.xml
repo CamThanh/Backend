@@ -72,10 +72,12 @@
 
 
 	<modules>
+		<module>Camthanh-model</module>
 		<module>Camthanh-Infra-Oauth2</module>
 		<module>Camthanh-Infra-Discovery</module>
 		<module>Camthanh-Infra-Gateway</module>
-		<module>Camthanh-model</module>
+		<module>Camthanh-account-service</module>
+		<module>Camthanh-book-service</module>
 
 		<!-- commented out because these don't build on Jenkins -->
 		<!-- <module>clients-angular4/oauth-ui-implicit-angular4</module> <module>clients-angular4/oauth-ui-password-angular4</module> -->

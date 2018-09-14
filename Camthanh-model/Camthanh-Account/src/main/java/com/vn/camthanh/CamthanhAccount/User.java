@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class User implements UserDetails {
     //@OrderBy
     //@JsonIgnore
 	private UserDetail userDetail;
-	
+
     @Column(name = "USER_NAME")
     private String username;
 
@@ -81,4 +82,8 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return !isCredentialsExpired();
     }
+    
+    @Column
+	@Embedded
+	private DateModel dateModel;
 }

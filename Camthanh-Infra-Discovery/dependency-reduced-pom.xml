@@ -7,7 +7,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.vn.camthanh</groupId>
-  <artifactId>Camthanh-discovery</artifactId>
+  <artifactId>Camthanh-Infra-Discovery</artifactId>
   <version>1.0.0</version>
   <build>
     <defaultGoal>install</defaultGoal>

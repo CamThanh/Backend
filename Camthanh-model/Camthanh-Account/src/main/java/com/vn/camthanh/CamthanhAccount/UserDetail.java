@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.sun.istack.internal.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,13 +26,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 @Entity
-@Table(name = "USER_DETAIL")
+@Table(name = "USER_DETAIL", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
 @Data
 @Embeddable
 public class UserDetail implements Serializable {

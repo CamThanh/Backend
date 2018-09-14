@@ -38,20 +38,21 @@ zuul:
   ignore-security-headers: true
   ignoredHeaders:
     - authorization
-  routes:  
-#    uaa:
-#      path: /user/**
-#      serviceId: Camthanh-oauth2-service
+  routes:
     account:
       path: /camthanh-account/** 
       serviceId: camthanh-account
       stripPrefix: false
+    book:
+      path: /camthanh-book/** 
+      serviceId: camthanh-book
+      stripPrefix: false
     
 ribbon: 
-  ConnectTimeout: 3000
-  ReadTimeout: 5000
+  ConnectTimeout: 180000
+  ReadTimeout: 120000
   eager-load:
-    enabled: false
+    enabled: true
   
 #zuul:  
 #  routes:    
