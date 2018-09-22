@@ -1,47 +1,43 @@
 package com.vn.camthanh.CamthanhAccount;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-@Entity
-@Table(name = "USER_DETAIL", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
+//@Entity
+//@Table(name = "USER_DETAIL", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
 @Data
 @Embeddable
 public class UserDetail implements Serializable {
 
-	@GeneratedValue(generator = "uuid2")
+	/**
+	 * 
+	 */
+	@Transient
+	private static final long serialVersionUID = 1L;
+
+	/*@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "ID", columnDefinition = "BINARY(16)")
 	@Id
-	private UUID uuid;
+	private UUID uuid;*/
 	
 	@NotNull
     @Email
@@ -54,7 +50,7 @@ public class UserDetail implements Serializable {
     @Column
     private String lastname;
 
-    @Column
+    @Column(length = 32, columnDefinition = "varchar(32) default 'NA'")
     @Enumerated(EnumType.STRING)
     private GENTLE_ENUM gentle;
 

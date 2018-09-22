@@ -59,8 +59,6 @@ public class AccountController extends BaseController<User> {
 		return responseEntity;
 	}
 	
-	
-	/*
 	@PostMapping
 	public ResponseEntity<User> add(@RequestBody User account) throws Exception {
 		LOGGER.info("User add: {}", account);
@@ -69,6 +67,9 @@ public class AccountController extends BaseController<User> {
 		ResponseEntity<User> responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
 		return responseEntity;
 	}
+	
+	/*
+	
 
 	@GetMapping("/{id}")
 	public User findById(@PathVariable("id") UUID id) {

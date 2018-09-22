@@ -5,12 +5,15 @@ import com.vn.camthanh.CamthanhAccount.User;
 import com.vn.camthanh.CamthanhAccount.UserDetail;
 import com.vn.camthanh.account.config.Encoders;
 import com.vn.camthanh.account.repository.AccountRepository;
+import com.vn.camthanh.account.repository.AuthorityRepository;
 import com.vn.camthanh.services.BaseServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -26,12 +29,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Import(Encoders.class)
 public class AccountServiceImpl extends BaseServiceImpl<User> implements UserDetailsService {
 
-//    @Autowired
-//    @Qualifier("AccountRepository")
-//    private BaseRepository repository;
+    @Autowired
+    private AuthorityRepository authRepository;
 //    
     @Autowired
     private PasswordEncoder userPasswordEncoder;
+    
+    @Autowired
+    private EntityManager em;
 	
 //    @Autowired
 //    private AuthorityRepository authRepository;
@@ -74,20 +79,43 @@ public class AccountServiceImpl extends BaseServiceImpl<User> implements UserDet
     	User user = setupModel();
     	return user;
     }
+    
+    @Override
+	public User save(User entity) {
+    	List<Authority> authRecords = new ArrayList<>();
+		authRecords.addAll(authRepository.findAll());
+		
+		List<Authority> auths = new ArrayList<>();
+		auths.addAll(entity.getAuthorities());
+		
+    	User cloned = cloneEntity(entity);
+		User result = repository.save(cloned);
+		
+		return result;
+	}
 	
-    public User addAuthority(UUID id, List<Authority> auths) {
-    	Optional<User> opt = repository.findById(id);
-    	User user = null;
-    	if(opt.isPresent()) {
-    		user = setupAuthority(opt.get(), auths);
-    	}
-    	return repository.save(user);
+    public List<Authority> addAuthority(List<Authority> auths, List<Authority> authRecords) {
+    	auths.forEach(auth -> {
+			for(Authority a : authRecords) {
+				if(a.getName().equalsIgnoreCase(auth.getName())) {
+					auth.setUuid(a.getUuid());
+					break;
+				} else {
+					//auth = authRepository.save(auth);
+				}
+			}
+			
+		});
+    	
+    	//auths = authRepository.saveAll();
+    	
+    	return auths;
     }
     
     @Override
 	public User cloneEntity(User account) {
     	User user = new User();
-		user.setUuid(account.getUuid());
+		//user.setUuid(account.getUuid());
 		user.setAccountExpired(account.isAccountExpired());
 		user.setAccountLocked(account.isAccountLocked());
 		user.setCredentialsExpired(account.isCredentialsExpired());
@@ -96,7 +124,7 @@ public class AccountServiceImpl extends BaseServiceImpl<User> implements UserDet
 		user.setUsername(account.getUsername());
 		
 		UserDetail userDetail = new UserDetail();
-		userDetail.setUuid(account.getUserDetail().getUuid());
+		//userDetail.setUuid(account.getUserDetail().getUuid());
 		userDetail.setEmail(account.getUserDetail().getEmail());
 		userDetail.setAge(account.getUserDetail().getAge());
 		userDetail.setFirstname(account.getUserDetail().getFirstname());
@@ -106,12 +134,29 @@ public class AccountServiceImpl extends BaseServiceImpl<User> implements UserDet
 		userDetail.setAvatarUri(account.getUserDetail().getAvatarUri());
 		user.setUserDetail(userDetail);
     	
+		/*List<Authority> authRecords = new ArrayList<>();
+		authRecords.addAll(authRepository.findAll());
+		
+		List<Authority> auths = new ArrayList<>();
+		auths.addAll((List<Authority>) account.getAuthorities());
+		
+		auths.forEach(auth -> {
+			for(Authority a : authRecords) {
+				if(a.getName().equalsIgnoreCase(auth.getName())) {
+					auth.setUuid(a.getUuid());
+					break;
+				}
+			}
+			authRepository.save(auth);
+		});*/
+		
     	List<Authority> auths = new ArrayList<>();
     	auths.add(new Authority("COMPANY_CREATE"));
     	auths.add(new Authority("COMPANY_READ"));
     	auths.add(new Authority("COMPANY_UPDATE"));
     	auths.add(new Authority("COMPANY_DELETE"));
     	
+		//authRepository.saveAll(auths);
     	user.setAuthorities(auths);
     	
     	return user;
@@ -128,7 +173,7 @@ public class AccountServiceImpl extends BaseServiceImpl<User> implements UserDet
 		user.setUsername(account.getUsername());
 		
 		UserDetail userDetail = new UserDetail();
-		userDetail.setUuid(account.getUserDetail().getUuid());
+		//userDetail.setUuid(account.getUserDetail().getUuid());
 		userDetail.setEmail(account.getUserDetail().getEmail());
 		userDetail.setAge(account.getUserDetail().getAge());
 		userDetail.setFirstname(account.getUserDetail().getFirstname());
@@ -171,8 +216,4 @@ public class AccountServiceImpl extends BaseServiceImpl<User> implements UserDet
     	return user;
 	}
 	
-	private User setupAuthority(User user, List<Authority> auths) {
-		user.getAuthorities().addAll(auths);
-		return user;
-	}
 }

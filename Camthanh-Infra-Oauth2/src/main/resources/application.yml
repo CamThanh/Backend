@@ -11,17 +11,17 @@ security.oauth2.resource.filter-order: 3
 logging:
   level:
     org.springframework:
-      security: TRACE
+#      security: TRACE
       oauth2: debug
-      jdbc:
-        core:
-         JdbcTemplate: DEBUG
-         StatementCreatorUtils: TRACE
+#      jdbc:
+#        core:
+#         JdbcTemplate: DEBUG
+#         StatementCreatorUtils: TRACE
     org.hibernate:
       SQL: DEBUG
-      type:
-        descriptor.sql.BasicBinder: TRACE
-      EnumType: TRACE
+#      type:
+#        descriptor.sql.BasicBinder: TRACE
+#      EnumType: TRACE
       
 spring: 
   datasource:
