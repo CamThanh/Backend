@@ -28,7 +28,7 @@
         <lombok.version>1.16.20</lombok.version>
         <oauth2.version>2.2.1.RELEASE</oauth2.version>
         <security.oauth2.version>2.0.10.RELEASE</security.oauth2.version>
-        <camthanh.account.version>0.0.1-SNAPSHOT</camthanh.account.version>
+        <camthanh.account.version>1.0.0</camthanh.account.version>
     </properties>
 
     <dependencies>
