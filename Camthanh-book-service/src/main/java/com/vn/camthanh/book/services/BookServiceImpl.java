@@ -123,6 +123,9 @@ public class BookServiceImpl extends BaseServiceImpl<Book> {
     	tags.add(tag);
     	model.setTags(tags);
     	
+    	DateModel dateModel = new DateModel();
+    	model.setDateModel(dateModel);
+    	
     	return model;
 	}
 	

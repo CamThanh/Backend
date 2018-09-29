@@ -1,6 +1,7 @@
 package com.vn.camthanh.account.services;
 
 import com.vn.camthanh.CamthanhAccount.Authority;
+import com.vn.camthanh.CamthanhAccount.DateModel;
 import com.vn.camthanh.CamthanhAccount.User;
 import com.vn.camthanh.CamthanhAccount.UserDetail;
 import com.vn.camthanh.account.config.Encoders;
@@ -211,8 +212,12 @@ public class AccountServiceImpl extends BaseServiceImpl<User> implements UserDet
     	auths.add(new Authority("COMPANY_READ"));
     	auths.add(new Authority("COMPANY_UPDATE"));
     	auths.add(new Authority("COMPANY_DELETE"));
-    	
     	user.setAuthorities(auths);
+    	
+    	DateModel dateModel = new DateModel();
+    	
+    	user.setDateModel(dateModel);
+    	
     	return user;
 	}
 	

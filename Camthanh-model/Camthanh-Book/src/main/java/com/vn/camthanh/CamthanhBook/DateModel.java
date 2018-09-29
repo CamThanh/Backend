@@ -1,5 +1,7 @@
 package com.vn.camthanh.CamthanhBook;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -11,9 +13,12 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Embeddable
+@Data
 public class DateModel {
 
 //	@GeneratedValue(generator = "uuid2")
@@ -21,6 +26,8 @@ public class DateModel {
 //	@Column(name = "ID", columnDefinition = "BINARY(16)")
 //	@Id
 //	private UUID uuid;
+	
+	//private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
 	
 	@Column
 	private Date createdDate;
@@ -33,5 +40,20 @@ public class DateModel {
 	
 	@Column
 	private Date expiredDate;
+	
+	@JsonIgnore
+	public boolean isValidExpDate() {
+		return effectiveDate.before(expiredDate) && !createdDate.after(effectiveDate);
+	}
+	
+	@JsonIgnore
+	public boolean isValidEffDate() {
+		return !effectiveDate.before(createdDate);
+	}
+	
+	@JsonIgnore
+	public boolean isValidCreateDate() {
+		return createdDate.getYear() > 1900;
+	}
 	
 }
