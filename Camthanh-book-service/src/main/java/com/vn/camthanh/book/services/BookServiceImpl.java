@@ -9,10 +9,15 @@ import com.vn.camthanh.CamthanhBook.Tag;
 import com.vn.camthanh.book.repository.BookRepository;
 import com.vn.camthanh.services.BaseServiceImpl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class BookServiceImpl extends BaseServiceImpl<Book> {
+public class BookServiceImpl extends BaseServiceImpl<Book> implements BookService {
 
 //    @Autowired
 //    private AuthorityRepository authRepository;
@@ -30,6 +35,35 @@ public class BookServiceImpl extends BaseServiceImpl<Book> {
     public BookServiceImpl(BookRepository repository) {
     	super(repository);
     	this.repository = repository;
+    }
+    
+    public Object readZipEntry(ZipInputStream zi) throws IOException {
+    	ZipEntry ze = zi.getNextEntry();
+    	out: while(ze != null) {
+    		if(ze.isDirectory()) {
+    			ze = zi.getNextEntry();
+    		} else {
+    			// ze is the text file
+    			switch (ze.getName()) {
+				case "info.txt":
+					Book book = new Book();
+					Scanner sc = new Scanner(zi);
+					while (sc.hasNextLine()) {
+					     System.out.println(sc.nextLine());
+					 }
+					System.out.println(ze.getName());
+					break out;
+
+				default:
+					System.out.println(ze.getName());
+					break;
+				}
+    			ze = zi.getNextEntry();
+    		}
+    	}
+    	zi.closeEntry();
+    	zi.close();
+    	return null;
     }
 
     @Override
