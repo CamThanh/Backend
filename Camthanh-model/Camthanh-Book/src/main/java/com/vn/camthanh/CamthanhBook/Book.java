@@ -1,17 +1,17 @@
 package com.vn.camthanh.CamthanhBook;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -39,22 +39,41 @@ public class Book {
     private boolean enabled;
 	
 	@Column
+    private boolean completed;
+	
+	@Column
     private String description;
 	
 	@Column
     private String authorId;
 	
+	@ElementCollection
+	@Column
+    private List<String> authors;
+	
+	@ElementCollection
+	@Column
+    private List<String> writers;
+	
+	@ElementCollection
+	@Column
+    private List<String> editors;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JoinTable(name = "BOOKS_AUTHORITIES", joinColumns = @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
-    private Collection<Authority> authorities;
+	private Collection<Authority> authorities;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JoinTable(name = "BOOKS_TAGS", joinColumns = @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
-    private Collection<Tag> tags;
+	@ElementCollection
+	@Column
+	private List<String> tags;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JoinTable(name = "BOOKS_CATEGORIES", joinColumns = @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
-    private Collection<Category> categories;
+	@ElementCollection
+	@Column
+	private List<String> categories;
 	
 	@Column
     private String summary;
@@ -63,11 +82,18 @@ public class Book {
     private int view;
 	
 	@Column
+    private int totalChapters;
+	
+	@Column
+    private float rate;
+	
+	@Column
     private String type;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JoinTable(name = "BOOKS_CHAPTERS", joinColumns = @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "CHAPTER_ID", referencedColumnName = "ID"))
-	private Collection<BookChapter> chapters;
+	//@ElementCollection
+	private List<BookChapter> chapters;
 	
 	@Column
 	@Embedded

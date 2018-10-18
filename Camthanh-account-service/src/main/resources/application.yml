@@ -32,14 +32,14 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   datasource:
-    url: jdbc:mysql://localhost:3306/camthanh_oauth2?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/camthanh_oauth2?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF-8
     username: root
     password: Admin@123
 #    driver-class-name: org.hibernate.dialect.MySQL5Dialect
         
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: update
     show-sql: true
     properties:
       hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect

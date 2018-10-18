@@ -33,7 +33,7 @@ public class BookChapter {
 	
 	@Lob
     @Column(columnDefinition="BLOB")
-    private String content;
+    private byte[] content;
 	
 	@Column
     private String folderContent;
